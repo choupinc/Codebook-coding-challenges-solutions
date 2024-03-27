@@ -1,15 +1,6 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
-
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''# Wires 0, 1, 2 are the control qubits
+import pennylane as qml
+from pennylane import numpy as np
+# Wires 0, 1, 2 are the control qubits
 # Wire 3 is the auxiliary qubit
 # Wire 4 is the target 
 dev = qml.device('default.qubit', wires=5)
@@ -28,9 +19,10 @@ def four_qubit_mcx_only_tofs():
     ##################
 
     # IMPLEMENT A 3-CONTROLLED NOT WITH TOFFOLIS
+    qml.Toffoli([0,1,3])
+    qml.Toffoli([2,3,4])
+    qml.Toffoli([0,1,3])
 
     return qml.state()
 
-
 #print(four_qubit_mcx_only_tofs())
-'''

@@ -1,15 +1,6 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
-
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''dev = qml.device("default.qubit", wires=1)
+import pennylane as qml
+import numpy as np
+dev = qml.device("default.qubit", wires=1)
 
 U = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
 
@@ -30,9 +21,10 @@ def varied_initial_state(state):
     ##################
 
     # KEEP THE QUBIT IN |0> OR CHANGE IT TO |1> DEPENDING ON THE state PARAMETER
-
+    if (state == 1):
+        qml.PauliX(wires=0)
     # APPLY U TO THE STATE
+    qml.QubitUnitary(U,wires=0)
 
 
     return qml.state()
-'''

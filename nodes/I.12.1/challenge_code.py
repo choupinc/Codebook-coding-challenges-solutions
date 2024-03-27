@@ -1,15 +1,8 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
+import pennylane as qml
+from pennylane import numpy as np
 
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''dev = qml.device('default.qubit', wires=2)
+num_wires = 2
+dev = qml.device('default.qubit', wires=num_wires)
 
 @qml.qnode(dev)
 def apply_cnot(basis_id):
@@ -23,7 +16,7 @@ def apply_cnot(basis_id):
     """
 
     # Prepare the basis state |basis_id>
-    bits = [int(x) for x in np.binary_repr(basis_id, width=dev.num_wires)]
+    bits = [int(x) for x in np.binary_repr(basis_id, num_wires)]
     qml.BasisStatePreparation(bits, wires=[0, 1])
 
     ##################
@@ -31,6 +24,7 @@ def apply_cnot(basis_id):
     ##################
 
     # APPLY THE CNOT
+    qml.CNOT([0,1])
     
     return qml.state()
 
@@ -42,12 +36,12 @@ def apply_cnot(basis_id):
 # REPLACE THE BIT STRINGS VALUES BELOW WITH THE CORRECT ONES
 cnot_truth_table = {
     "00" : "00",
-    "01" : "00",
-    "10" : "00",
-    "11" : "00"
+    "01" : "01",
+    "10" : "11",
+    "11" : "10"
 }
 
 
 # Run your QNode with various inputs to help fill in your truth table
 print(apply_cnot(0))
-'''
+

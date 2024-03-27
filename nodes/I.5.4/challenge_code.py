@@ -1,15 +1,6 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
-
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''dev = qml.device('default.qubit', wires=3)
+import pennylane as qml
+from pennylane import numpy as np
+dev = qml.device('default.qubit', wires=3)
 
 @qml.qnode(dev)
 def too_many_ts():
@@ -19,7 +10,37 @@ def too_many_ts():
     Returns:
         array[float]: The measurement outcome probabilities.
     """
-
+    qml.Hadamard(wires = 0)
+    qml.Hadamard(wires = 1)
+    qml.Hadamard(wires = 2)
+    
+    qml.T(wires = 0)
+    qml.T(wires = 1)
+    qml.adjoint(qml.T)(wires = 2)
+    
+    qml.T(wires = 0)
+    
+    qml.Hadamard(wires = 0)
+    qml.Hadamard(wires = 1)
+    qml.Hadamard(wires = 2)
+    
+    qml.adjoint(qml.T)(wires = 0)
+    qml.T(wires = 1)
+    qml.adjoint(qml.T)(wires = 2)
+    
+    qml.adjoint(qml.T)(wires = 0)
+    qml.T(wires = 1)
+    qml.adjoint(qml.T)(wires = 2)
+    
+    qml.T(wires = 1)
+    qml.adjoint(qml.T)(wires = 2)
+    
+    qml.T(wires = 1)
+    
+    qml.Hadamard(wires = 0)
+    qml.Hadamard(wires = 1)
+    qml.Hadamard(wires = 2)
+    
     return qml.probs(wires=[0, 1, 2])
 
 @qml.qnode(dev)
@@ -37,7 +58,31 @@ def just_enough_ts():
 
     # IMPLEMENT THE CIRCUIT, BUT COMBINE AND OPTIMIZE THE GATES
     # TO MINIMIZE THE NUMBER OF TS
-
+    
+    qml.Hadamard(wires = 0)
+    qml.Hadamard(wires = 1)
+    qml.Hadamard(wires = 2)
+    
+    qml.S(wires = 0)
+    qml.T(wires = 1)
+    qml.adjoint(qml.T)(wires = 2)
+    
+    qml.Hadamard(wires = 0)
+    qml.Hadamard(wires = 1)
+    qml.Hadamard(wires = 2)
+    
+    qml.adjoint(qml.S)(wires = 0)
+    qml.S(wires = 1)
+    qml.adjoint(qml.S)(wires = 2)
+    
+    qml.adjoint(qml.T)(wires = 2)
+    qml.S(wires = 1)
+    
+    
+    qml.Hadamard(wires = 0)
+    qml.Hadamard(wires = 1)
+    qml.Hadamard(wires = 2)
+    
     return qml.probs(wires=[0, 1, 2])
 
 ##################
@@ -45,12 +90,11 @@ def just_enough_ts():
 ##################
 
 # FILL IN THE CORRECT VALUES FOR THE ORIGINAL CIRCUIT
-original_depth = 0
-original_t_count = 0
-original_t_depth = 0
+original_depth = 8
+original_t_count = 13
+original_t_depth = 6
 
 # FILL IN THE CORRECT VALUES FOR THE NEW, OPTIMIZED CIRCUIT
-optimal_depth = 0
-optimal_t_count = 0
-optimal_t_depth = 0
-'''
+optimal_depth = 6
+optimal_t_count = 3
+optimal_t_depth = 2

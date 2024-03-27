@@ -1,15 +1,6 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
-
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''dev = qml.device('default.qubit', wires=2)
+import pennylane as qml
+from pennylane import numpy as np
+dev = qml.device('default.qubit', wires=2)
 
 @qml.qnode(dev)
 def circuit_1(theta):
@@ -24,8 +15,9 @@ def circuit_1(theta):
     ##################
     # YOUR CODE HERE #
     ##################  
-
-    return
+    qml.RX(theta, 0)
+    qml.RX(2*theta, 1)
+    return (qml.expval(qml.Z(0)),qml.expval(qml.Z(1)))
 
 
 @qml.qnode(dev)
@@ -42,8 +34,9 @@ def circuit_2(theta):
     ##################
     # YOUR CODE HERE #
     ##################  
- 
-    return
+    qml.RX(theta, 0)
+    qml.RX(2*theta, 1)
+    return qml.expval(qml.Z(0) @ qml.Z(1))
 
 
 def zi_iz_combination(ZI_results, IZ_results):
@@ -61,7 +54,7 @@ def zi_iz_combination(ZI_results, IZ_results):
         produces results equivalent to measuring ZZ.
     """
 
-    combined_results = np.zeros(len(ZI_results))
+    combined_results = ZI_results * IZ_results
 
     ##################
     # YOUR CODE HERE #
@@ -84,4 +77,3 @@ ZZ_results = np.array([circuit_2(t) for t in theta])
 
 # Plot your results
 plot = plotter(theta, ZI_results, IZ_results, ZZ_results, combined_results)
-'''

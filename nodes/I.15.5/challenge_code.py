@@ -1,15 +1,6 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
-
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''def extract_qubit_state(input_state):
+import pennylane as qml
+from pennylane import numpy as np
+def extract_qubit_state(input_state):
     """Extract the state of the third qubit from the combined state after teleportation.
     
     Args:
@@ -26,8 +17,11 @@ challenge_code = '''def extract_qubit_state(input_state):
     ##################
 
     # DETERMINE THE STATE OF THE THIRD QUBIT
-
-    return 
+    a = input_state[0] * 2
+    b = input_state[1] * 2
+    
+    #we can use other pair of id as well like [2,3] [4,5] [6,7] or even mix them like [0,3] [1,2]
+    return [a,b]
     
 
 # Here is the teleportation routine for you
@@ -53,4 +47,3 @@ def teleportation():
 # Print the extracted state after teleportation
 full_state = teleportation()
 print(extract_qubit_state(full_state))
-'''

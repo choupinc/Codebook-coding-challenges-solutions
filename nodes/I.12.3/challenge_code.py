@@ -1,15 +1,6 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
-
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''dev = qml.device('default.qubit', wires=3)
+import pennylane as qml
+from pennylane import numpy as np
+dev = qml.device('default.qubit', wires=3)
 
 @qml.qnode(dev)
 def controlled_rotations(theta, phi, omega):
@@ -28,11 +19,13 @@ def controlled_rotations(theta, phi, omega):
     ##################
     # YOUR CODE HERE #
     ##################
-
+    
     # APPLY THE OPERATIONS IN THE CIRCUIT AND RETURN MEASUREMENT PROBABILITIES
-
-    return 
+    qml.Hadamard(0)
+    qml.CRX(theta, [0,1])
+    qml.CRY(phi, [1,2])
+    qml.CRZ(omega, [2,0])
+    return qml.probs()
 
 theta, phi, omega = 0.1, 0.2, 0.3
 print(controlled_rotations(theta, phi, omega))
-'''

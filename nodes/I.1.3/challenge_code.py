@@ -1,15 +1,5 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
-
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''def measure_state(state, num_meas):
+import numpy as np
+def measure_state(state, num_meas):
     """Simulate a quantum measurement process.
 
     Args:
@@ -28,6 +18,5 @@ challenge_code = '''def measure_state(state, num_meas):
     # COMPUTE THE MEASUREMENT OUTCOME PROBABILITIES
 
     # RETURN A LIST OF SAMPLE MEASUREMENT OUTCOMES
- 
+    return np.random.choice([0, 1], size=num_meas, p=[np.abs(state[0])**2, np.abs(state[1])**2])  
     pass
-'''

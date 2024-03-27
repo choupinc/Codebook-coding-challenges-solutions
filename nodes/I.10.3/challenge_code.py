@@ -1,15 +1,8 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
+import pennylane as qml
+from pennylane import numpy as np
+dev = qml.device("default.qubit", wires=1, shots=100000)
 
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''dev = qml.device("default.qubit", wires=1, shots=100000)
+dev = qml.device("default.qubit", wires=1, shots=100000)
 
 @qml.qnode(dev)
 def circuit():
@@ -23,7 +16,7 @@ def circuit():
 
     # RETURN THE MEASUREMENT SAMPLES OF THE CORRECT OBSERVABLE
 
-    return 
+    return qml.sample(qml.PauliY(0))
 
 
 def compute_expval_from_samples(samples):
@@ -40,16 +33,25 @@ def compute_expval_from_samples(samples):
     """
 
     estimated_expval = 0
-
+    plusOne = 0
+    minusOne = 0
+    
     ##################
     # YOUR CODE HERE #
     ##################
 
     # USE THE SAMPLES TO ESTIMATE THE EXPECTATION VALUE
-
+    for i in samples:
+        if i == 1:
+           plusOne+=1
+        if i == -1:
+            minusOne+=1
+    
+    estimated_expval = (plusOne-minusOne) / len(samples)
+        
+        
     return estimated_expval
 
 
 samples = circuit()
 print(compute_expval_from_samples(samples))
-'''

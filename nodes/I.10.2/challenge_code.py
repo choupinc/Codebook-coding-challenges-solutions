@@ -1,15 +1,6 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
-
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''# An array to store your results
+import pennylane as qml
+from pennylane import numpy as np
+# An array to store your results
 shot_results = []
 
 # Different numbers of shots
@@ -21,9 +12,16 @@ for shots in shot_values:
     ##################
 
     # CREATE A DEVICE, CREATE A QNODE, AND RUN IT
-
-    # STORE RESULT IN SHOT_RESULTS ARRAY
+    dev = qml.device('default.qubit', 1,shots)
     
+    @qml.qnode(dev)
+    def circuit():
+        qml.RX(np.pi/4,0)
+        qml.Hadamard(0)
+        qml.Z(0)
+        return qml.expval(qml.PauliY(0))
+    # STORE RESULT IN SHOT_RESULTS ARRAY
+    shot_results.append(circuit())
 
 print(qml.math.unwrap(shot_results))
-'''
+

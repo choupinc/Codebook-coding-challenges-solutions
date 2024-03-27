@@ -1,15 +1,6 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
-
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''dev = qml.device('default.qubit', wires=2)
+import pennylane as qml
+from pennylane import numpy as np
+dev = qml.device('default.qubit', wires=2)
 
 # Starting from the state |00>, implement a PennyLane circuit
 # to construct each of the Bell basis states.
@@ -21,6 +12,8 @@ def prepare_psi_plus():
     ##################
 
     # PREPARE (1/sqrt(2)) (|00> + |11>)
+    qml.Hadamard(0)
+    qml.CNOT([0,1])
 
     return qml.state()
 
@@ -32,7 +25,9 @@ def prepare_psi_minus():
     ##################
 
     # PREPARE (1/sqrt(2)) (|00> - |11>)
-    
+    qml.Hadamard(0)
+    qml.Z(0)
+    qml.CNOT([0,1])
     return qml.state()
 
 
@@ -43,7 +38,10 @@ def prepare_phi_plus():
     ##################
 
     # PREPARE  (1/sqrt(2)) (|01> + |10>)
- 
+    qml.Hadamard(0)
+    qml.CNOT([0,1])
+    qml.X(1)
+    
     return qml.state()
 
 
@@ -54,6 +52,10 @@ def prepare_phi_minus():
     ##################
 
     # PREPARE  (1/sqrt(2)) (|01> - |10>)
+    qml.Hadamard(0)
+    qml.Z(0)
+    qml.CNOT([0,1])
+    qml.X(1)
     
     return qml.state()
 
@@ -68,4 +70,3 @@ phi_minus = prepare_phi_minus()
 #print(f"|ψ_-> = {psi_minus}")
 #print(f"|ϕ_+> = {phi_plus}")
 #print(f"|ϕ_-> = {phi_minus}")
-'''

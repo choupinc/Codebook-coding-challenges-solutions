@@ -1,15 +1,6 @@
-"""The code template to supply to the front end. This is what the user will
-    be asked to complete and submit for grading.
-
-    Do not include any imports.
-
-    This is not a REPL environment so include explicit 'print' statements
-    for any outputs you want to be displayed back to the user.
-
-    Use triple single quotes to enclose the formatted code block.
-"""
-
-challenge_code = '''dev = qml.device('default.qubit', wires=1)
+import pennylane as qml
+from pennylane import numpy as np
+dev = qml.device('default.qubit', wires=1)
 
 @qml.qnode(dev)
 def apply_ry(theta, state):
@@ -31,12 +22,12 @@ def apply_ry(theta, state):
     ##################
 
     # APPLY RY(theta) AND RETURN THE STATE
-
-    return
+    qml.RY(theta, wires = 0)
+    
+    return qml.state()
 
 # Code for plotting
 angles = np.linspace(0, 4*np.pi, 200)
 output_states = np.array([apply_ry(t, 0) for t in angles])
 
 plot = plotter(angles, output_states)
-'''
